@@ -1,17 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { SearchingWrapper, SearchingTextArea } from 'components/SearchingFilter/SearchingFilter.styled';
+import { SearchingWrapper, FilterField } from 'components/SearchingFilter/SearchingFilter.styled';
+import { useDispatch } from "react-redux";
+import { setFilter } from 'Redux/Store';
 
+export const SearchingFilter = () => {   
 
-export const SearchingFilter = ({onFilterAction}) => {   
+    const dispatch = useDispatch();
+
+    const onFilterField = (event) => {
+        dispatch(setFilter(event.target.value))
+    };
+
     return (
         <SearchingWrapper>
             Find contacts by Name
-            <SearchingTextArea onChange={onFilterAction}></SearchingTextArea>
+            <FilterField onChange={onFilterField}></FilterField>
         </SearchingWrapper>
     );
 };
 
-SearchingFilter.propTypes = {
-    onFilterAction: PropTypes.func.isRequired,
-};

@@ -4,19 +4,30 @@ import { Formik } from 'formik';
 import { InputStyled, DataForm, InputWrapper } from 'components/Form/Form.styled';
 // import * as yup from 'yup';
 import { nanoid } from 'nanoid';
+import { useSelector } from "react-redux";
+import { getContacts } from 'Redux/Store';
 
 export const ContactsForm = ({setNewContact}) => {
 
-    const onFormSubmit = (values, {resetForm}) => {
-        const newContact = {
-            id: nanoid(),
-            name: values.name,
-            number: values.number,
-        };
 
-        setNewContact(newContact);
+    const contactsNamesList = useSelector(getContacts).map(item => item.name.toLowerCase())
+
+
+    const onFormSubmit = (values, {resetForm}) => {
+        if (contactsNamesList.includes(values.name.toLowerCase())) {
+            alert(`${values.name} is already in contacts`);
+        } else {
+            const newContact = {
+                id: nanoid(),
+                name: values.name,
+                number: values.number,
+            };
+    
+            setNewContact(newContact);
+            
+            resetForm();
+        }
         
-        resetForm();
     };
 
 
