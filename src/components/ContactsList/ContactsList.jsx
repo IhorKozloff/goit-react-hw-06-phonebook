@@ -6,9 +6,9 @@ import { getContacts, getFilterStatus } from 'Redux/Store';
 export const ContactsList = () => {
 
     const contactsStateData = useSelector(getContacts);
-    const filterStateData = useSelector(getFilterStatus);
+    const filterStateData = useSelector(getFilterStatus).toLowerCase();
 
-    const filteredContacts = contactsStateData.filter(item => item.name.includes(filterStateData))
+    const filteredContacts = contactsStateData.filter(item => item.name.toLowerCase().includes(filterStateData))
 
     return <ul>
         {
