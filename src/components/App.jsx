@@ -1,9 +1,17 @@
 import { SearchBar} from "components/SearchBar/SearchBar";
 import { ContactsList } from "./ContactsList/ContactsList";
 import { SearchingFilter } from "./SearchingFilter/SearchingFilter";
-
+import { useDispatch } from "react-redux";
+import { removeContact } from 'Redux/Store';
 
 export const App = () =>  {
+
+
+  const dispatch = useDispatch();
+
+  const onDeleteContact = (delitingTargetId) => {
+    dispatch(removeContact(delitingTargetId))
+  };
 
   return (
     <>
@@ -14,7 +22,7 @@ export const App = () =>  {
 
       <SearchingFilter/>
 
-      <ContactsList />
+      <ContactsList onDeleteContact={onDeleteContact}/>
         
     </>
     
